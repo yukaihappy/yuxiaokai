@@ -1,0 +1,283 @@
+使用select2，官网地址： https://select2.org/，具体使用可参照分包商人员新增页面的工种选择。
+
+使用BootStrap 的radio button
+参考地址： https://v4.bootcss.com/docs/4.3/components/forms/#checkboxes-and-radios
+
+1. 新建包，路径中不建议使用大写字母。（建议添加阿里巴巴代码检查插件）
+错误示例： 
+正确示例： 
+
+
+2. 数据字典，若是此项目中特有的，必须以xz_开头，例如：风险等级的数据字典：xz_rask_rating
+3. 每个Controller都必须添加Shiro的权限标识，然后在菜单中配置相应的权限@RequiresPermissions("common:dict:dict")
+对于多个页面公用的Controller，建议每个页面都写个Controller然后通过		@RequiresPermissions控制权限。
+4. 对于页面表单提交，比如页面数据的保存、修改等，若使用@RequestBody接收数据，则一定要使用Java对象接收，禁止使用Map接收。（有安全问题，xxs过滤不到）
+
+5.     对于查询时使用@RequestParam接收查询参数，则无影响。
+
+6.     JqGrid中，对于可编辑单元格，必须添加xss过滤。
+
+
+
+
+
+
+bootstrap日期和时间表单组件
+官网地址：https://www.bootcss.com/p/bootstrap-datetimepicker/index.htm
+可以设定日期开始和结束时间，只能选择中间的日期
+
+使用的是：jQuery插件validate
+菜鸟教程地址：https://www.runoob.com/jquery/jquery-plugin-validate.html
+文档很全面，几乎可以解决遇到的所有问题。
+
+演示地址：http://www.treejs.cn/v3/demo.php#_305
+由于按钮有权限控制，所以需要把增加、删除、编辑按钮放在上部
+
+wangeditor ， 轻量、简洁、易用、开源免费。
+官网： http://www.wangeditor.com/index.html
+1\引入文件
+<link rel="stylesheet" href="/js/plugins/wangEditor/wangEditor-fullscreen-plugin.css">
+<script src="/js/plugins/ckeditor/wangEditor/wangEditor.min.js"></script>
+<script src="/js/plugins/ckeditor/wangEditor/wangEditor-fullscreen-plugin.js"></script>
+2\js中初始化
+/**
+ * 引入富文本编辑器
+ */
+var E = window.wangEditor;
+var editor = new E('#editor');
+editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1') > 0
+// 配置图片上传地址
+editor.customConfig.customUploadImg = function (files, insert)
+{
+   // files 是 input 中选中的文件列表
+   // insert 是获取图片 url 后，插入到编辑器的方法
+   var formFile = new FormData();
+   formFile.append("action", "UploadVMKImagePath");
+   formFile.append("file", files[0]); //加入文件对象
+   $.ajax(
+      {
+         url : '/system/sysFileItem/fileUpload?folderId=7' + '&relationId=' + id,
+         type : "POST",
+         data : formFile,
+         dataType: "json",
+         processData:false,
+         contentType:false,
+         cache:false,
+         success : function(data)
+         {
+            if (data.code == 0)
+            {
+               // 上传代码返回结果之后，将图片插入到编辑器中
+               var imgUrl = "/system/easyexcel/fileShow/" + data.id;
+               insert(imgUrl);
+            }
+         }
+      });
+
+}
+editor.create();
+E.fullscreen.init('#editor');
+
+已找到合适的导航栏： http://www.jq22.com/jquery-info22165
+
+
+使用freemark 导出word
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git下载代码
+git的简单命令操作,即怎么从github上下载代码到本地
+https://blog.csdn.net/kxj19980524/article/details/84672120?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+(使用git如何下载github上的代码到本地详解)
+https://blog.csdn.net/weixin_44474742/article/details/92382536
+(或取代码)
+https://blog.csdn.net/weixin_44010710/article/details/103297979
+命令行
+--进代码目录
+$ cd D:\Code
+--连接git地址
+$ git remote add origin http://yukai@192.168.0.124:8080/r/inControl.git
+--克隆
+$ git clone http://yukai@192.168.0.124:8080/r/InControl.git
+$ git remote add origin http://yukai@192.168.0.124:8080/r/inControl-admin.git
+$ git clone http://yukai@192.168.0.124:8080/r/inControl-admin.git
+
+
+
+
+
+下到本地redis:
+https://www.runoob.com/redis/redis-install.html
+cmd
+ //打开管理员cmd窗口
+ cd D:\Java\Redis
+ .\redis-server.exe
+ //新打开管理员cmd窗口
+ PS C:\Windows\system32> cd D:\Java\Redis
+ PS D:\Java\Redis> .\redis-cli.exe -h 127.0.0.1 -p 6379
+ 
+如果本地下载了redis可以写个脚本 .bat文件(2\3行改路径):
+ @echo off
+d:
+cd /Java/Redis
+redis-server.exe redis.windows.conf 
+exit
+ 
+ 
+ Docker教程地址
+https://www.cnblogs.com/gqzdev/p/11736856.html
+
+下载Docker -> 开启Hyper-v
+Docker for window
+我的阿里云镜像加速器地址
+https://h5d3mvdz.mirror.aliyuncs.com
+ 
+docker 	Id： dockeryukai 
+		email：yukaihappy123@163.com 
+ 
+管理员窗口
+cd "C:\Program Files\Docker\Docker"
+./DockerCli.exe -SwitchDaemon
+ 
+ 安装 Toolbox
+  Docker for Windows Installer
+  镜像加速
+ 
+
+ 
+Alter table ZHDB_Assess.dbo.A_AimChange Alter column OriginalContent nvarchar(2000);
+Alter table ZHDB_Assess.dbo.A_AimChange Alter column ChangeContent nvarchar(2000);
+
+
+ 
+ 
+ mysql改密码
+ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ --------------------docker装mysql和redis
+ 
+ 
+ 
+ 
+ 
+ --nacos的配置文件配下数据库连接,然后打开bin下的start.cmd启动下
+ cd nacos\bin
+ startup.cmd
+ 
+ 
+ 
+ 下载完node之后装angular
+ >管理员权限打开控制台 (npm和yarn都可以,选一个就行)
+ --配镜像
+ npm config set registry "https://registry.npm.taobao.org"
+ npm config set sass_binary_site "http://cdn.npm.taobao.org/dist/node-sass"
+ yarn config set registry "https://registry.npm.taobao.org"
+ yarn config set sass_binary_site "http://cdn.npm.taobao.org/dist/node-sass"
+ --node npm指令安装angular
+ 
+ 执行 npm install -g @angular/cli@8.3.0
+>或执行 yarn global add @angular/cli@8.3.0
+ npm install 或 yarn  
+ --切换到项目目录下
+ cd e:\code\inControl-admin
+  
+ >执行 npm install 或 yarn
+ --vs启动服务
+ ng serve --host 0.0.0.0 --disable-host-check --open
+ 
+ 
+ 
+ 
+ 
+ docker 开启mysql  -h帮助
+ 
+ --查看运行中容器
+ docker ps -a
+ --拉取镜像
+ docker pull mysql:5.6
+ --查看image
+ docker images ls
+ --启动(*)
+ docker run -itd --name mysql -p 3306:3306 --restart=always -e MYSQL_ROOT_PASSWORD=1234 mysql:5.6
+ --进入(*)
+ docker exec -it mysql bash
+ mysql -u root -p
+ --输入密码1234
+ 
+ redis
+ --拉取镜像
+ docker pull redislabs/rebloom:latest
+ --启动
+ docker run -d --name redis -p 6379:6379 --restart=always redislabs/rebloom --requirepass "Hao123"
+ 
+ 
+ ---------nacos
+ cd d:\Java\nacos\bin
+ startup.cmd
+ 
+ 
+ 
+ 生成组件
+ ng g ng-alain:tpl iclist list -m=base -t=xxx
+ng g ng-alain:tpl icedit edit -m=base -t=xxx
+ 
